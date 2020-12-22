@@ -15,22 +15,23 @@ packages=10
 resentSMSDelaySteps=5
 pkg_threshold_default=20
 resp_time_threshold_default=80
-phone_number_default=84967236147
+phone_number_default=( 84967236147 84
+time=`date +'%R'` 
 
 # Variable in each stations
 SMS_flag=( [0]="- No SMS"  [1]="- SMS" )
-SMS_content=( [404]="- Station not found - Error 404"  [00]="- Stable connection - Code 00"
-              [10]="- Connection fixed - Code 10"      [20]="- Connection fixed - Code 20"
-              [01]="- Unstable connection - Error 01"  [11]="- Connection has not been fixed - Error 11"
-              [21]="- Destination host reachable but unstable connection - Error 21"
-              [02]="- Destination host unreachable - Error 02"
-              [12]="- Destination host unreachable - Error 12"
-              [22]="- Destination host unreachable - Error 22" )
+SMS_content=( [404]="- Station not found - Error 404 - $time"  [00]="- Stable connection - Code 00 - $time"
+              [10]="- Connection fixed - Code 10 - $time"      [20]="- Connection fixed - Code 20 - $time"
+              [01]="- Unstable connection - Error 01 - $time"  [11]="- Connection has not been fixed - Error 11 - $time"
+              [21]="- Destination host reachable but unstable connection - Error 21 - $time"
+              [02]="- Destination host unreachable - Error 02 - $time"
+              [12]="- Destination host unreachable - Error 12 - $time"
+              [22]="- Destination host unreachable - Error 22 - $time" )
 hosts=( [5001]=google.com   [5002]=fb.com         [5003]=reddit.com     [5004]=youtube.com   [5005]=github.com    
         [5006]=amazon.com   [5007]=wikipedia.org  [5008]=archlinux.org  [5009]=linkedin.com  [5010]=duckduckgo.com  
         [5011]=google.com   [5012]=fb.com         [5013]=reddit.com     [5014]=youtube.com   [5015]=github.com  
         [5016]=amazon.com   [5017]=wikipedia.org  [5018]=archlinux.org  [5019]=linkedin.com  [5020]=duckduckgo.com
-        [5021]=google.com   [5022]=fb.com         [5023]=reddit.com     [5023]=youtube.com   [5025]=github.com 
+        [5021]=google.com   [5022]=fb.com         [5023]=reddit.com     [5024]=youtube.com   [5025]=github.com 
         [5026]=amazon.com   [5027]=wikipedia.org  [5028]=archlinux.org  [5029]=linkedin.com  [5030]=duckduckgo.com
         [5031]=google.com   [5032]=fb.com         [5033]=reddit.com     [5034]=youtube.com   [5035]=github.com  
         [5036]=amazon.com   [5037]=wikipedia.org  [5038]=archlinux.org  [5039]=linkedin.com  [5040]=duckduckgo.com )

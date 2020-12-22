@@ -4,11 +4,13 @@
 cd ~/.check_ping
 . ./config_ping.sh
 
+# Check if all status and log directory exits, if not create it
+mkdir -p log output_ping status_ping SMSDelayTimes
 # Create log with system date
 echo -e "`date` - Crontab run: \n" >> log_ping
 
 # Ping to all station 
-for ((i = 5001; i <= $((5001+$number_of_stations)); i++))
+for ((i = 5001; i < $((5001+$number_of_stations)); i++))
 do
   bash ./ping.sh $i &
 done
