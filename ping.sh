@@ -27,9 +27,9 @@ if [[ -z "$resp_time_threshold" ]]; then resp_time_threshold=$resp_time_threshol
 
 # Get phone number to an array, if null return default
 declare -a phoneNumber
-all_phoneNumber=${phone_number[$stationID]}
-IFS="," phoneNumber=( $all_phoneNumber )
-if [[ ${#phoneNumber[@]} -eq 0 ]]; then phoneNumber+=$phone_number_default; fi
+#all_phoneNumber=${phone_number[$stationID]}
+IFS="," phoneNumber=( $phone_number_default )
+#if [[ ${#phoneNumber[@]} -eq 0 ]]; then phoneNumber=$phone_number_default; fi
 
 # Ping to FE and read 2 last line from output, remove '%' and 'ms'and write to ./output_ping/$1 file
 ping -c $packages $host | tail -n2 | sed 's/%//' | sed 's/ms//' > ./output_ping/$1
@@ -56,16 +56,16 @@ then
         then
             if [[ sysDate > resentSMSDelay ]]
             then  
-                bash ./sendSMS.sh "$stationID ${SMS_flag[1]} ${SMS_content[$eventStatus$currentStatus]}" ${phoneNumber[@]}
+                bash ./sendSMS.sh "$stationID $host ${SMS_flag[1]} ${SMS_content[$eventStatus$currentStatus]}" ${phoneNumber[@]}
                 resentSMSDelay=$(date +'%Y-%m-%d %T' --date="$sysDate $resentSMSDelayStep minutes")
                 echo $resentSMSDelay > ./SMSDelayTimes/$stationID
-                echo "$stationID ${SMS_content[10]}" > ./log/$stationID
+                echo "$stationID $host ${SMS_content[10]}" > ./log/$stationID
             else
-                echo "$stationID ${SMS_flag[0]} ${SMS_content[$eventStatus$currentStatus]}" > ./log/$stationID
+                echo "$stationID $host ${SMS_flag[0]} ${SMS_content[$eventStatus$currentStatus]}" > ./log/$stationID
             fi
             echo "0" > ./status_ping/$stationID
         else 
-            echo "$stationID ${SMS_flag[0]} ${SMS_content[00]}" > ./log/$stationID 
+            echo "$stationID $host ${SMS_flag[0]} ${SMS_content[00]}" > ./log/$stationID 
         fi
     elif [[ $packages_lost -ge $threshold ]] || [[ $avg_resp_time -ge $resp_time_threshold ]]
     then
@@ -74,29 +74,29 @@ then
         then
             if [[ sysDate > resentSMSDelay ]]
             then
-                bash ./sendSMS.sh "$stationID ${SMS_flag[1]} ${SMS_content[01]}" ${phoneNumber[@]}
-                echo "$stationID ${SMS_flag[1]} ${SMS_content[01]}" > ./log/$stationID
+                bash ./sendSMS.sh "$stationID $host ${SMS_flag[1]} ${SMS_content[01]}" ${phoneNumber[@]}
+                echo "$stationID $host ${SMS_flag[1]} ${SMS_content[01]}" > ./log/$stationID
                 resentSMSDelay=$(date +'%Y-%m-%d %T' --date="$sysDate $resentSMSDelayStep minutes")
                 echo $resentSMSDelay > ./SMSDelayTimes/$stationID
             else
-                echo "$stationID ${SMS_flag[0]} ${SMS_content[01]}" > ./log/$stationID
+                echo "$stationID $host ${SMS_flag[0]} ${SMS_content[01]}" > ./log/$stationID
             fi
             echo "1" > ./status_ping/$stationID
         elif [[ $eventStatus -eq 1 ]]
         then
             if [[ sysDate > resentSMSDelay ]]
             then
-                bash ./sendSMS.sh "$stationID ${SMS_flag[1]} ${SMS_content[11]}" ${phoneNumber[@]}
-                echo "$stationID ${SMS_flag[1]} ${SMS_content[11]}" > ./log/$stationID
+                bash ./sendSMS.sh "$stationID $host ${SMS_flag[1]} ${SMS_content[11]}" ${phoneNumber[@]}
+                echo "$stationID $host ${SMS_flag[1]} ${SMS_content[11]}" > ./log/$stationID
                 resentSMSDelay=$(date +'%Y-%m-%d %T' --date="$sysDate $resentSMSDelayStep minutes")
                 echo $resentSMSDelay > ./SMSDelayTimes/$stationID
             else
-                echo "$stationID ${SMS_flag[0]} ${SMS_content[11]}" > ./log/$stationID
+                echo "$stationID $host ${SMS_flag[0]} ${SMS_content[11]}" > ./log/$stationID
             fi
         elif [[ $eventStatus -eq 2 ]]
         then
-            bash ./sendSMS.sh "$stationID ${SMS_flag[1]} ${SMS_content[21]}" ${phoneNumber[@]}
-            echo "$stationID ${SMS_flag[1]} ${SMS_content[21]}" > ./log/$stationID
+            bash ./sendSMS.sh "$stationID $host ${SMS_flag[1]} ${SMS_content[21]}" ${phoneNumber[@]}
+            echo "$stationID $host ${SMS_flag[1]} ${SMS_content[21]}" > ./log/$stationID
             echo "1" > ./status_ping/$stationID
         fi  
     fi
@@ -104,12 +104,12 @@ else
     currentStatus=2
     if [[ sysDate > resentSMSDelay ]]
     then
-        bash ./sendSMS.sh "$stationID ${SMS_flag[1]} ${SMS_content[$eventStatus$currentStatus]}" ${phoneNumber[@]}
-        echo "$stationID ${SMS_flag[1]} ${SMS_content[$eventStatus$currentStatus]}" > ./log/$stationID
+        bash ./sendSMS.sh "$stationID $host ${SMS_flag[1]} ${SMS_content[$eventStatus$currentStatus]}" ${phoneNumber[@]}
+        echo "$stationID $host ${SMS_flag[1]} ${SMS_content[$eventStatus$currentStatus]}" > ./log/$stationID
         echo "2" > ./status_ping/$stationID
         resentSMSDelay=$(date +'%Y-%m-%d %T' --date="$sysDate $resentSMSDelayStep minutes")
         echo $resentSMSDelay > ./SMSDelayTimes/$stationID 
     else
-        echo "$stationID ${SMS_flag[0]} ${SMS_content[$eventStatus$currentStatus]}" > ./log/$stationID
+        echo "$stationID $host ${SMS_flag[0]} ${SMS_content[$eventStatus$currentStatus]}" > ./log/$stationID
     fi 
 fi
