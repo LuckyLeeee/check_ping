@@ -26,10 +26,14 @@ if [[ -z "$pkg_threshold" ]]; then pkg_threshold=$pkg_threshold_default; fi
 if [[ -z "$resp_time_threshold" ]]; then resp_time_threshold=$resp_time_threshold_default; fi
 
 # Get phone number to an array, if null return default
-declare -a phoneNumber
-#all_phoneNumber=${phone_number[$stationID]}
-IFS="," phoneNumber=( $phone_number_default )
-#if [[ ${#phoneNumber[@]} -eq 0 ]]; then phoneNumber=$phone_number_default; fi
+# declare -a phoneNumber
+# all_phoneNumber=${phone_number[$stationID]}
+# IFS="," phoneNumber=( $phone_number_default )
+# if [[ ${#phoneNumber[@]} -eq 0 ]]; then phoneNumber=$phone_number_default; fi
+
+# Push email to an array, if null return default
+declare -a email
+IFS="," email=( $email_default )
 
 # Ping to FE and read 2 last line from output, remove '%' and 'ms'and write to ./output_ping/$1 file
 ping -c $package $host | tail -n2 | sed 's/%//' | sed 's/ms//' > ./output_ping/$1
@@ -42,8 +46,10 @@ eventStatus=`cat ./status_ping/$stationID`
 
 # Get system date and delay step
 sysDate=`date +'%Y-%m-%d %T'`
-resentSMSDelayStep=$resentSMSDelaySteps
-resentSMSDelay=`cat ./SMSDelayTimes/$stationID`
+# resentSMSDelayStep=$resentSMSDelaySteps
+# resentSMSDelay=`cat ./SMSDelayTimes/$stationID`
+resent_email_delay_step=
+resent_email_delay=
 
 # Check status case of station, return message and send SMS if error
 if [[ ! -z "$packages_lost" ]]

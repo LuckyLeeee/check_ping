@@ -1,28 +1,26 @@
 #!/bin/bash
 
 # Declare array variable
-declare -a id
 declare -a hosts
 declare -a status
 declare -a pkg_thresholds
 declare -a resp_time_thresholds
-declare -a phone_number
-declare -a SMS_content
-declare -a SMS_flag
+declare -a emails
+declare -a email_content
+declare -a email_flag
 
 # Default variable
 packages=50
-resentSMSDelaySteps=20
+resent_email_delay_steps=20
 pkg_threshold_default=20
 resp_time_threshold_default=100
-#phone_number_default=84967236147,84968123568,84379335269,84961057115
 #email_default="vinhnt@vdtc.com.vn,daint@vdtc.com.vn,hann2@vdtc.com.vn,tungnk@vdtc.com.vn"
 email_default="vinhnt@vdtc.com.vn,luckylee2110@gmail.com,vinh.nt2110@gmail.com"
 time=`date +'%R'` 
 
 # Variable in each stations
-SMS_flag=( [0]="- No SMS"  [1]="- SMS" )
-SMS_content=( [404]="- Station not found - Error 404 - $time"  [00]="- Stable connection - Code 00 - $time"
+email_flag=( [0]="- No Email"  [1]="- Email" )
+email_content=( [404]="- Station not found - Error 404 - $time"  [00]="- Stable connection - Code 00 - $time"
               [10]="- Connection fixed - Code 10 - $time"      [20]="- Connection fixed - Code 20 - $time"
               [01]="- Unstable connection - Error 01 - $time"  [11]="- Connection has not been fixed - Error 11 - $time"
               [21]="- Destination host reachable but unstable connection - Error 21 - $time"
