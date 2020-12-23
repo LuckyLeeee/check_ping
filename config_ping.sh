@@ -15,7 +15,9 @@ packages=50
 resentSMSDelaySteps=20
 pkg_threshold_default=20
 resp_time_threshold_default=100
-phone_number_default=84967236147,84968123568,84379335269,84961057115
+#phone_number_default=84967236147,84968123568,84379335269,84961057115
+#email_default="vinhnt@vdtc.com.vn,daint@vdtc.com.vn,hann2@vdtc.com.vn,tungnk@vdtc.com.vn"
+email_default="vinhnt@vdtc.com.vn,luckylee2110@gmail.com,vinh.nt2110@gmail.com"
 time=`date +'%R'` 
 
 # Variable in each stations
@@ -51,5 +53,5 @@ resp_time_thresholds=(
         [5016]=100  [5017]=100  [5018]=100  [5019]=100  [5020]=100
         [5021]=100  [5022]=100  [5023]=100  [5024]=100  [5025]=100 
         [5026]=100  [5027]=100  )
-phone_number=(
+emails=(
 )
