@@ -11,7 +11,7 @@ declare -a email_flag
 
 # Default variable
 packages=50
-resent_email_delay_steps=20
+resent_email_delay_steps=30
 pkg_threshold_default=20
 resp_time_threshold_default=100
 #email_default="vinhnt@vdtc.com.vn,daint@vdtc.com.vn,hann2@vdtc.com.vn,tungnk@vdtc.com.vn"

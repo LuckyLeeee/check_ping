@@ -8,5 +8,5 @@ email=("$@")
 # Send content to all email
 for i in "${email[@]}";
 do
-  curl --ssl-reqd smtps://smtp.vdtc.com.vn:465 --mail-from "support@vdtc.com.vn" --mail-rcpt $i --upload-file $content --user "support@vdtc.com.vn:Etc@2020"
+  curl --ssl-reqd smtps://smtp.vdtc.com.vn --mail-from "support@vdtc.com.vn" --mail-rcpt $i --upload-file $content --user "support@vdtc.com.vn:Etc@2020" > /dev/null 2>&1
 done
